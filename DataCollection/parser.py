@@ -75,11 +75,18 @@ async def extract_restaurant_data(html_content, url):
     #logging.debug(f"price_range: {price_range}, cuisine_type: {cuisine_type}")
 
     # Extract description
+    description = ""
     try:
-        description = data["review"]["description"] # in json is easy
-    except (KeyError, TypeError):
-        description = ""
+
+        #description = data["review"]["description"] # in json is easy
+        # Update: apparently json truncate by default
+        description_div = soup.find('div', class_='data-sheet__description')
+        if description_div:
+            description = description_div.get_text(strip=True)
+    except AttributeError:
+        description = ""  # Set to empty if description is missing
     #logging.debug(f"description: {description}")
+
 
     # Extract facilities and services
     facilities_services = [] # list of servicies
@@ -118,6 +125,20 @@ async def extract_restaurant_data(html_content, url):
         pass
     #logging.debug(f"latitude: {latitude}, longitude: {longitude}")
 
+    # Extract Restaurant official link
+    website_link = ""
+    try:
+        # div containing the website link
+        container_div = soup.find('div', class_='collapse__block-item link-item')
+        if container_div:
+            # <a> tag within this div
+            link_tag = container_div.find('a', class_='link js-dtm-link')
+            if link_tag and link_tag.has_attr('href'):
+                website_link = link_tag['href']
+    except AttributeError:
+        logging.error("Error finding website link.")
+
+    #logging.debug(f"website_link: {website_link}")
 
 
 # Initialize default opening hours, as NAs cause sometimes this info is not avaible
@@ -194,7 +215,8 @@ async def extract_restaurant_data(html_content, url):
         "friday_hours": opening_hours.get("Friday", "closed"),
         "saturday_hours": opening_hours.get("Saturday", "closed"),
         "sunday_hours": opening_hours.get("Sunday", "closed"),
-        "url": url
+        "url_micheline": url,
+        "url": website_link
     }
 
     # Debug log for each extracted field
@@ -215,7 +237,7 @@ async def parse_all_restaurants(batch_size=100): # batch_size controls the numbe
             "price_range", "cuisine_type", "description", "facilities_services",
             "credit_cards", "phone_number", "latitude", "longitude",
             "monday_hours", "tuesday_hours", "wednesday_hours", "thursday_hours",
-            "friday_hours", "saturday_hours", "sunday_hours", "url"
+            "friday_hours", "saturday_hours", "sunday_hours", "url_micheline", "url",
         ]
         await tsvfile.write("\t".join(fieldnames) + "\n")
         logging.debug("TSV file header written.")
