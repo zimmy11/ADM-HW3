@@ -820,7 +820,7 @@ https://guide.michelin.com/en/sardegna/marina-di-arbus/restaurant/corsaro-nero
 https://guide.michelin.com/en/campania/sant--agata-sui-due-golfi/restaurant/lo-stuzzichino
 https://guide.michelin.com/en/veneto/mazzorbo/restaurant/venissa
 https://guide.michelin.com/en/lombardia/malnate/restaurant/crotto-valtellina
-https://guide.michelin.com/en/toscana/lamporecchio/restaurant/atman
+https://guide.michelin.com/en/toscana/vinci_1839587/restaurant/atman
 https://guide.michelin.com/en/sicilia/lampedusa/restaurant/cavalluccio-marino
 https://guide.michelin.com/en/lombardia/lecco/restaurant/nicolin
 https://guide.michelin.com/en/piemonte/torino/restaurant/tre-galline
@@ -1753,7 +1753,6 @@ https://guide.michelin.com/en/campania/anacapri/restaurant/l-olivo
 https://guide.michelin.com/en/lombardia/isola-dovarese/restaurant/caffe-la-crepa
 https://guide.michelin.com/en/veneto/verona/restaurant/la-canonica-1186584
 https://guide.michelin.com/en/umbria/brufa/restaurant/quattro-sensi
-https://guide.michelin.com/en/veneto/padova/restaurant/radici-restaurant
 https://guide.michelin.com/en/puglia/altamura/restaurant/calvi-ristorante
 https://guide.michelin.com/en/piemonte/alba/restaurant/hostaria-dai-musi
 https://guide.michelin.com/en/veneto/noventa-padovana_1818158/restaurant/opificio
