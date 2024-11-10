@@ -50,18 +50,22 @@ def run_pipeline():
 
 #run_pipeline()
 
-def compute_tfidf(df, inverted_index):
+def update_inverted_index(df, inverted_index, vocabulary):
     total_documents = df.shape[0]
+
     for term_id, documents in inverted_index.items():
         documents_frequency = math.log(total_documents / (1 + len(documents)))
+        word = str(vocabulary.loc[vocabulary["term_id"] == int(term_id), "word"].iloc[0])
         idf_scores = []
 
         for i in range(len(documents)):
             doc_id = documents[i]
-            doc = df.iloc[int(doc_id)]["description"]
-            tf_score = doc.count(term_id) / (len(doc.split()))
+            doc = df.iloc[int(doc_id)]["cleaned_text"]
+            
+            tf_score = doc.count(word) / (len(doc.split()))
             idf_score = documents_frequency * tf_score
             idf_scores.append((doc_id, idf_score))
+
         inverted_index[term_id] = idf_scores
     return inverted_index
 
@@ -86,7 +90,7 @@ def compute_tfidf_query(query, inverted_index, df, vocabulary):
 
     for word in query.split():
         term_id = str(vocabulary[vocabulary["word"] == word]["term_id"].iloc[0])
-        tf = query.count(word) / (len(query.split()))
+        tf = query.count(word) / len(query.split())
         idf = math.log(total_documents / 1 + len(inverted_index[term_id]))
         tf_idf = tf * idf
         tfidf_scores.append((term_id,tf_idf))
@@ -108,8 +112,6 @@ def rank_documents(query, inverted_index, df, vocabulary):
             if doc_id not in document_tfidf:
                 document_tfidf[doc_id] = []
             document_tfidf[doc_id].append((word, tf_idf))
-    print(document_tfidf)
-    print(query_tfidf_scores)
     similarities = []
     for doc_id, doc_vector in document_tfidf.items():
         sim = cosine_similarity(query_tfidf_scores, doc_vector)
