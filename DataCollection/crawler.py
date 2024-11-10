@@ -59,7 +59,7 @@ def get_michelin_urls():
             # While first running the code it, it was saving also unrelated links like "https://guide.michelin.com/en/hotels"
             if "/restaurant/" in url: #valid link contain "/restaurant/" 
                 restaurant_urls.append(url)
-                logging.debug(f"Found restaurant URL: {url}")
+                #logging.debug(f"Found restaurant URL: {url}")
     
     # Save to .txt (it was requested like this but just returning URLs was easier)
     logging.info("Saving URLs to michelin_urls.txt")
@@ -96,7 +96,7 @@ async def fetch_and_save_html(session, url, folder, filename, headers): #Asynchr
             with open(filepath, 'w', encoding='utf-8') as file:
                 file.write(html_content)
             
-            logging.debug(f"Saved HTML to {filepath}")
+            #logging.debug(f"Saved HTML to {filepath}")
     except Exception as e: # a single failed request doesn't stop the script
         logging.error(f"Failed to fetch {url}: {e}")
 

@@ -275,7 +275,7 @@ async def process_file(file_path):
         url = lines[0].replace("<!-- URL: ", "").replace(" -->", "").strip()
         html_content = "".join(lines[1:])
 
-    logging.debug(f"Processing file: {file_path}, URL: {url}")
+    #logging.debug(f"Processing file: {file_path}, URL: {url}")
     restaurant_data = await extract_restaurant_data(html_content, url)
     return restaurant_data
 

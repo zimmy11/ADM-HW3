@@ -10,7 +10,7 @@ def tsv_to_csv(tsv_file, csv_file):
     """
     with open(tsv_file, 'r', encoding='utf-8') as tsv, open(csv_file, 'w', encoding='utf-8', newline='') as csv_f:
         tsv_reader = csv.reader(tsv, delimiter='\t')
-        csv_writer = csv.writer(csv_f, delimiter=',')
+        csv_writer = csv.writer(csv_f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         
         for row in tsv_reader:
             csv_writer.writerow(row)

@@ -17,7 +17,7 @@ def organize_folders():
             target_path = os.path.join(MAIN_FOLDER, folder_name)
             
             shutil.move(folder_name, target_path) # move folders to main folder
-            print(f"Moved folder '{folder_name}' to '{MAIN_FOLDER}'")
+            #print(f"Moved folder '{folder_name}' to '{MAIN_FOLDER}'")
 
     print("All page_* folders have been organized into the main folder.")
 
