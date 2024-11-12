@@ -261,7 +261,7 @@ async def parse_all_restaurants(batch_size=100): # batch_size controls the numbe
             # Write results 
             for row in results:
                 # Convert each field to a string and handle None values as empty strings
-                output_row = [str(row.get(field, "")) for field in fieldnames]
+                output_row = [str(row.get(field, "")).replace("\n", " ") for field in fieldnames]
                 await tsvfile.write("\t".join(output_row) + "\n")
 
     logging.info(f"Data extraction completed. Results saved to {OUTPUT_FILE}")
