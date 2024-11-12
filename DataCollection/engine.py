@@ -8,6 +8,9 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import math
+import heapq
+
+
 
 def run_pipeline():
 
@@ -121,13 +124,3 @@ def rank_documents(query, inverted_index, df, vocabulary):
     ranked_documents = sorted(similarities, key=lambda x: x[1], reverse=True)
     
     return ranked_documents
-   
-
-
-
-
-
-
-    
-
-
