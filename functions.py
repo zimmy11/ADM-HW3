@@ -3,6 +3,15 @@ from sklearn.feature_extraction.text import CountVectorizer
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import heapq
+import nltk
+import pandas as pd
+import string
+from nltk.stem import PorterStemmer
+import contractions
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+
 
 def compute_smallest_path(list):
     """
@@ -117,6 +126,48 @@ def extended_compute_smallest_path(list):
     # In the end we print all the elements in the 'result' list
     # representing the best path to collect all the packages
     print("".join(result))
+
+
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
+
+def remove_stopwords(text):
+    if isinstance(text, str):
+
+
+        words=text.split()
+        words=[word for word in words if word.lower() not in stop_words]
+        cleaned_text = ' '.join(words)
+
+        return cleaned_text
+    else:
+            return "" 
+    
+
+
+def remove_punc(text):
+    if isinstance (text,str):
+         return text.translate(str.maketrans('', '', string.punctuation))
+    else:
+        return ""  
+    
+stemmer=PorterStemmer()
+
+def apply_stemming(text):
+    words= text.split()
+    stemmed_words=[stemmer.stem(word) for word in words]
+    stemmed_text=' '.join(stemmed_words)
+    return stemmed_text
+
+nltk.download('wordnet')
+lemmatizer = WordNetLemmatizer()
+
+def apply_lemmatization(text):
+    text = text.lower()
+    words = text.split()
+    lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
+    lemmatized_text = ' '.join(lemmatized_words)  
+    return lemmatized_text
 
 
 
@@ -369,3 +420,135 @@ def visualize_frequency(df):
     plt.tight_layout()
     plt.subplots_adjust(top=0.85)
     plt.show();
+
+
+
+# Function to compute the cosine similarities and create a new column in df_query
+
+def score_column(query, updated_inverted_index, df_query, vocabulary, df):
+
+    # Compute tf idf-scores between the terms in the query and the description of all restaurants
+    tf_idf_query = compute_tfidf_query(query, updated_inverted_index, df, vocabulary)
+    
+
+    document_tfidf = {}
+    term_ids = [x[0] for x in tf_idf_query]
+    for word in term_ids:
+
+        for entry in updated_inverted_index[word]:
+            doc_id = entry[0]
+            tf_idf = entry[1]
+
+            if doc_id not in document_tfidf:
+                document_tfidf[doc_id] = []
+            
+            document_tfidf[doc_id].append((word, tf_idf))
+    
+    
+    df_result_ids = set(df_query['document_id'])
+
+    # Compute the cosine similarities
+    similaritiy = []
+    for doc_id, doc_vector in document_tfidf.items():
+        if doc_id in df_result_ids:
+            sim = cosine_similarity(tf_idf_query, doc_vector)
+            similaritiy.append((doc_id, sim))
+    
+    # Append to df_query the cosine similarities between query and each restaurant description
+    similarity_dict = dict(similaritiy)
+    df_query['cosine_similarity'] = df_query['document_id'].map(similarity_dict).fillna(0)
+    
+    return df_query
+
+def rank_new_score(query, updated_inverted_index, df, vocabulary, facilities_rq = None, cuisine_type_rq = None, k=5):
+
+    # Compute similarity scores based on the Cosine Similarity 
+    df_response = rank_documents(query, updated_inverted_index, df, vocabulary, k=5)   
+
+    # Append document ids, price ranges, facilities and cuisine types to the data frame that contains the result of the query 
+    df_response = df_response.merge(df[['url', 'document_id']], on='url', how='left')
+    df_response = df_response.merge(df[['url', 'price_range']], on = 'url', how = 'left')
+    df_response = df_response.merge(df[['url', 'facilities_services']], on = 'url', how = 'left')
+    df_response = df_response.merge(df[['url', 'cuisine_type']], on = 'url', how = 'left')
+
+    # Create a data frame to append the new score
+    df_score = score_column(query, updated_inverted_index, df_response, vocabulary, df)
+
+    # Apply preprocessing to the facilities and the cuisine type columns 
+    df_score['facilities_services'] = df_score['facilities_services'].apply(remove_stopwords).apply(apply_stemming).apply(remove_punc).apply(apply_lemmatization)
+    df_score['cuisine_type'] = df_score['cuisine_type'].apply(remove_stopwords).apply(apply_stemming).apply(remove_punc).apply(apply_lemmatization)
+
+    # Create a set to avoid duplicates in the output
+    ids = set()
+
+    # Initialize scores list
+    scores = []
+
+    # Convert the price range to a numeric value and append the column to df_score
+    new_price_range = [df_score.loc[i, 'price_range'].count('€') if str(df_score.loc[i, 'price_range'].count('€')) else 0 for i in df_score.index]
+    df_score['new_price_range'] = new_price_range
+    
+    for i in df_score.index:
+
+        # If we computed the score on a document don't do anything
+        if df_score.loc[i, 'document_id'] in ids:
+            continue
+
+        # Find the facilities requested that match the facilities of the restaurant
+        facilities = 0
+        if facilities_rq is not None:
+            for facility in df_score.loc[i, 'facilities_services'].split():
+                if facility in facilities_rq:
+                    facilities += 1
+        
+        
+        # Using log2(facilities+2) to make this part of the score 1 if a restaurant doesn't match any facility asked
+        facilities = np.log2(facilities+2)
+        
+
+        # Create a cuisine variable to use in the new score if the cuisine type asked matches the cuisine of the restaurant
+        cuisine = 0
+        if cuisine_type_rq is not None:
+            for word in df_score.loc[i, 'cuisine_type'].split():
+                # If the cuisine requested (in the query or separately) matches cuisine takes the value of 1 otherwise it's 0
+                if word in cuisine_type_rq or word in query:
+                    cuisine = 1
+                    break
+        
+        # Find restaurant numeric price range and cosine similarity 
+        new_price_range = df_score.loc[i, 'new_price_range']
+        cos_sim = df_score.loc[i, 'cosine_similarity']
+        
+        # Create the new score
+        final_score = cuisine + (cos_sim*facilities)/new_price_range
+
+        # Append the new score and add the id of the document to the used ids
+        if df_score.loc[i, 'document_id'] not in ids:
+            scores.append((final_score, df_score.loc[i, 'document_id']))
+            ids.add(df_score.loc[i, 'document_id'])
+        
+        # Store restaurants in a heap
+        if len(scores) < k:
+            heapq.heappush(scores, (final_score, df_score.loc[i, 'document_id']))
+        else:
+            heapq.heappushpop(scores, (final_score, df_score.loc[i, 'document_id']))
+        
+        
+        # Sort the scores and return relevant documents based on it
+        scores = sorted(scores, key = lambda x:x[0], reverse = True)
+        out = []
+        ids = set()
+        for score, idx in scores:
+            if idx in ids:
+                continue
+            ids.add(idx)
+            doc = df_score[df_score['document_id'] == idx].iloc[0]     
+            
+            if score > 0:
+                out.append({'restaurant_name' : doc['restaurant_name'],
+                'address': doc['address'],
+                'description' : doc['description'],
+                'website': doc['url'],
+                'score' : np.round(score, 4)})
+            
+    return pd.DataFrame(out)
