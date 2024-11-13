@@ -1,5 +1,8 @@
 # **HomeWork 3 - Michelin restaurants in Italy**
-The goal of this project is to develop a **Michelin Restaurant Search Engine** that allows food enthusiasts to discover Michelin-starred restaurants across Italy based on their unique preferences. This search engine will help users explore Italy’s finest dining experiences by offering two types of search options: a **Conjunctive Search Engine** and a **Ranked Search Engine**. In addition, we were asked to visualize the most relevant restaurant through *folium* returned by our Search Engine.
+The goal of this project is to develop a **Michelin Restaurant Search Engine** that allows food enthusiasts to discover Michelin-starred restaurants across Italy based on their unique preferences.
+
+This search engine will help users explore Italy’s finest dining experiences by offering two types of search options: a **Conjunctive Search Engine** and a **Ranked Search Engine**. In addition, we were asked to visualize the most relevant restaurant through *folium* returned by our Search Engine.
+
 All the data we've worked on was crawled from the [Michelin Guide website](https://guide.michelin.com/en/it/restaurants) to retrieve their HTML content, then parsed the HTML to extract relevant information, and finally stored the extracted data in a TSV file for further analysis.
 ___
 <div style="text-align: center;">
