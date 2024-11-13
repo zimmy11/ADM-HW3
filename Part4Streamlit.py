@@ -243,7 +243,7 @@ if st.button("Search"):
         # Display top-k results in Streamlit
         if not top_k_df.empty:
             m = create_restaurant_map(top_k_df)
-            st_folium(m, width=800, height=500)  # Display the map with st_folium
+            st_folium(m)  # Display the map with st_folium
         else:
             st.warning("No matching restaurants found.")
     except Exception as e:
