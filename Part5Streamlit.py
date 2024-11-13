@@ -24,7 +24,7 @@ unique_credit_cards = sorted({card.strip() for cards in dataset_bonus['credit_ca
 unique_services = sorted({service.strip() for services in dataset_bonus['facilities_services'] for service in services})
 
 # Streamlit UI for search filters
-st.title("Michelin Restaurant Search")
+st.title("Michelin Restaurant Advanced Search Engine")
 
 restaurant_name = st.text_input("Enter restaurant name (optional):").strip().lower()
 city = st.selectbox("Select city (optional):", [""] + unique_cities)

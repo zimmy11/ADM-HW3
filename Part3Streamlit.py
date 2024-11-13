@@ -109,7 +109,7 @@ updated_inverted_index = update_inverted_index(df_tfidf, inverted_index, vocabul
 with open("updated_inverted_index.json", "w") as file:
     json.dump(updated_inverted_index, file)
 # Streamlit UI
-st.title("Restaurant Search Engine")
+st.title("Restaurant Search Engine with Custome Score")
 
 # Input Query
 query = st.text_input("Enter your query:", value="MODERN; Seasonal CUISINE. DISH")
