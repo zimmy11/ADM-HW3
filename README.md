@@ -44,7 +44,7 @@ ___
     <br>
 
 ___
-## **Collaborators**
+## **Collaborators - Group 20**
 - [Marco Zimmatore](https://github.com/zimmy11)
 - [Emanuele Iaccarino](https://github.com/emanueleiacca)
 - [Gabriele Cabibbo](https://github.com/cabibbo2196717)
