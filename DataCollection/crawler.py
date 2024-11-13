@@ -117,12 +117,9 @@ async def download_html_async(urls_file='DataCollection/michelin_urls.txt', batc
         for i, url in enumerate(restaurant_urls):
             folder = f"page_{(i // batch_size) + 1}"
             filename = f"restaurant_{i + 1}.html"
-
             headers = get_random_headers() # periodically getting new headers to not get caught by bot
-
             # appends tasks for each URL
             tasks.append(fetch_and_save_html(session, url, folder, filename,headers)) #tasks enable concurrent downloads within batches
-            
             if (i + 1) % batch_size == 0 or (i + 1) == len(restaurant_urls): # for every batch_size URLs
                 logging.info(f"Downloading batch {i // batch_size + 1}")
                 await asyncio.gather(*tasks) # runs the batch concurrently

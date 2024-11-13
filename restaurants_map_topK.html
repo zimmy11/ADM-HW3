@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_994f7a4e36f9bdbf58ca250d7a5739e3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
+</head>
+<body>
+    
+    
+     <div style="position: fixed; 
+                 bottom: 50px; left: 50px; width: 150px; height: 140px; 
+                 background-color: white; border:2px solid grey; z-index:9999; font-size:14px;">
+     <strong>Price Range Legend</strong><br>
+     <i style="color:green; font-size:15px;">&#9679;</i> €<br>
+     <i style="color:blue; font-size:15px;">&#9679;</i> €€<br>
+     <i style="color:orange; font-size:15px;">&#9679;</i> €€€<br>
+     <i style="color:red; font-size:15px;">&#9679;</i> €€€€<br>
+     </div>
+     
+    
+            <div class="folium-map" id="map_994f7a4e36f9bdbf58ca250d7a5739e3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_994f7a4e36f9bdbf58ca250d7a5739e3 = L.map(
+                "map_994f7a4e36f9bdbf58ca250d7a5739e3",
+                {
+                    center: [43.970166340000006, 10.956021779999999],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_994f7a4e36f9bdbf58ca250d7a5739e3);
+
+            
+
+        
+    
+            var tile_layer_087fa9eb6024c53eb6afbf3c537e2b6d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_087fa9eb6024c53eb6afbf3c537e2b6d.addTo(map_994f7a4e36f9bdbf58ca250d7a5739e3);
+        
+    
+            var marker_cluster_68695313dc528899a3d4aeed6a8a009b = L.markerClusterGroup(
+                {}
+            );
+        
+    
+            var marker_a7f02d7ae426598f4b057c2b80e538c7 = L.marker(
+                [41.725881, 12.6797918],
+                {}
+            ).addTo(marker_cluster_68695313dc528899a3d4aeed6a8a009b);
+        
+    
+            var icon_d751486db7fa68dd8853f98004aba17b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "cutlery", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_a7f02d7ae426598f4b057c2b80e538c7.setIcon(icon_d751486db7fa68dd8853f98004aba17b);
+        
+    
+        var popup_fecc2eafcd6581024f066246ee508adf = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_a1ebea03f3b2ed4a1a6ea3e39ba5b1d3 = $(`<div id="html_a1ebea03f3b2ed4a1a6ea3e39ba5b1d3" style="width: 100.0%; height: 100.0%;">         <strong>Sintesi</strong><br>         <em>Contemporary, Seasonal Cuisine</em><br>         <br><strong>Address:</strong> viale dei Castani 17, Ariccia, 72, ITA<br>         <strong>Price Range:</strong> €€€<br>         <strong>Phone:</strong> +39 06 4555 7597<br>         <strong>Website:</strong> <a href="http://ristorantesintesi.it" target="_blank">http://ristorantesintesi.it</a><br>         <strong>Description:</strong> A modern, welcoming restaurant whose motto “Tradition & Innovation” perfectly sums up its cuisine. On the à la carte and tasting menus alike you’ll find classic dishes including risotto with peas, lemon and raw scampi alongside more creative offerings such as grilled pannicolo (hanger steak) with Nemi strawberries and herbs, all presented in a modern and precise manner, and with the occasional nod to Asian techniques and northern European culinary methods (fermentation, marinades, dry aging of fish etc). The wine list changes with the seasons and the menu.<br>         <strong>Score:</strong> 1.2887<br>         <br><strong>Opening Hours:</strong><br>         <table style="width:100%; border:1px solid black;">             <tr><td><strong>Monday</strong></td><td>12:30-15:00, 19:30-23:00</td></tr>             <tr><td><strong>Tuesday</strong></td><td>closed</td></tr>             <tr><td><strong>Wednesday</strong></td><td>closed</td></tr>             <tr><td><strong>Thursday</strong></td><td>19:30-23:00</td></tr>             <tr><td><strong>Friday</strong></td><td>19:30-23:00</td></tr>             <tr><td><strong>Saturday</strong></td><td>12:30-15:00, 19:30-23:00</td></tr>             <tr><td><strong>Sunday</strong></td><td>12:30-15:00, 19:30-23:00</td></tr>         </table><br>         <strong>Facilities:</strong> Air conditioning, Car park<br>         <strong>Credit Cards:</strong> amex, dinersclub, mastercard, visa         </div>`)[0];
+                popup_fecc2eafcd6581024f066246ee508adf.setContent(html_a1ebea03f3b2ed4a1a6ea3e39ba5b1d3);
+            
+        
+
+        marker_a7f02d7ae426598f4b057c2b80e538c7.bindPopup(popup_fecc2eafcd6581024f066246ee508adf)
+        ;
+
+        
+    
+    
+            marker_a7f02d7ae426598f4b057c2b80e538c7.bindTooltip(
+                `<div>
+                     Sintesi - €€€ - Contemporary, Seasonal Cuisine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_61ad926f3b4fc38f6f6e62520c8b11eb = L.marker(
+                [44.4016634, 8.945731],
+                {}
+            ).addTo(marker_cluster_68695313dc528899a3d4aeed6a8a009b);
+        
+    
+            var icon_1128e7f348ec3c9f6002a6a213eedd6b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "cutlery", "iconColor": "white", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_61ad926f3b4fc38f6f6e62520c8b11eb.setIcon(icon_1128e7f348ec3c9f6002a6a213eedd6b);
+        
+    
+        var popup_26946b2ca675d035699aa8135216783c = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6aff636e64eee15d9d80d90ae189d8fa = $(`<div id="html_6aff636e64eee15d9d80d90ae189d8fa" style="width: 100.0%; height: 100.0%;">         <strong>San Giorgio</strong><br>         <em>Modern Cuisine, Ligurian</em><br>         <br><strong>Address:</strong> viale Brigate Bisagno 69r, Genoa, 16129, ITA<br>         <strong>Price Range:</strong> €€€<br>         <strong>Phone:</strong> +39 010 595 5205<br>         <strong>Website:</strong> <a href="https://www.ristorantesangiorgiogenova.it/" target="_blank">https://www.ristorantesangiorgiogenova.it/</a><br>         <strong>Description:</strong> Situated in the city albeit not right in the centre, San Giorgio is a typical Genovese restaurant – elegant and classic in style, with excellent cuisine served by the Scala family who have been in charge for decades. Young chef Samuele Di Mauro is at the helm, having started here as an apprentice and worked his way to the position of sous-chef and then head chef in 2022. Despite a focus on modern presentation and techniques, as demonstrated in dishes such as the raw bluefin tuna seasoned with an intense verbena mousse and served with caper cream and a “caviar” of dried and fried tuna, his cuisine is Mediterranean in style, with its roots in Ligurian aromas and flavours. The wine list is as impressive as the cuisine, with an entire section dedicated to French and Italian sparkling wines.<br>         <strong>Score:</strong> 1.2752<br>         <br><strong>Opening Hours:</strong><br>         <table style="width:100%; border:1px solid black;">             <tr><td><strong>Monday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Tuesday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Wednesday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Thursday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Friday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Saturday</strong></td><td>12:30-14:30, 19:30-22:30</td></tr>             <tr><td><strong>Sunday</strong></td><td>closed</td></tr>         </table><br>         <strong>Facilities:</strong> Air conditioning, Interesting wine list, Wheelchair access<br>         <strong>Credit Cards:</strong> amex, mastercard, visa         </div>`)[0];
+                popup_26946b2ca675d035699aa8135216783c.setContent(html_6aff636e64eee15d9d80d90ae189d8fa);
+            
+        
+
+        marker_61ad926f3b4fc38f6f6e62520c8b11eb.bindPopup(popup_26946b2ca675d035699aa8135216783c)
+        ;
+
+        
+    
+    
+            marker_61ad926f3b4fc38f6f6e62520c8b11eb.bindTooltip(
+                `<div>
+                     San Giorgio - €€€ - Modern Cuisine, Ligurian
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_66313e09cd19592a90ee5cbe5552a609 = L.marker(
+                [45.4658732, 10.5498607],
+                {}
+            ).addTo(marker_cluster_68695313dc528899a3d4aeed6a8a009b);
+        
+    
+            var icon_af68886ea9bb3e4d2a6a91545a6d340e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "cutlery", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_66313e09cd19592a90ee5cbe5552a609.setIcon(icon_af68886ea9bb3e4d2a6a91545a6d340e);
+        
+    
+        var popup_7f9f966c12b68c86b29b5fe1eaad7111 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_dc8177b0468a1727e3f38c64e268c1ef = $(`<div id="html_dc8177b0468a1727e3f38c64e268c1ef" style="width: 100.0%; height: 100.0%;">         <strong>Esplanade</strong><br>         <em>Italian, Modern Cuisine</em><br>         <br><strong>Address:</strong> via Lario 3, Desenzano del Garda, 25015, ITA<br>         <strong>Price Range:</strong> €€€€<br>         <strong>Phone:</strong> +39 030 914 3361<br>         <strong>Website:</strong> <a href="https://www.ristorante-esplanade.com/" target="_blank">https://www.ristorante-esplanade.com/</a><br>         <strong>Description:</strong> One of Italy’s long-established restaurants, the Esplanade has been a proud holder of a Michelin star since 1992 and is so renowned among food-lovers that its name is practically synonymous with that of Desenzano del Garda. Boasting a superb location alongside the lake, from which it is separated only by its own garden (the summer outdoor space is delightful), it is equally famous for its top-quality cuisine. The menu is one of the most extensive (at this level) in Italy, with an equal balance of meat and fish, and Italian and regional dishes prepared using mainly seasonal ingredients – this is classic Italian cuisine that does not stray too far from its traditional roots yet with delicate modern touches added by chef Massimo Fezzardi. The dining room, where the attentive service is as precise as a metronome, is overseen by two superb characters, namely Marzio Lee Vallio, the sommelier who won the 2024 Michelin Guide Italy Sommelier Award, and the exuberant and flawless Emanuele Signorini, a true professional whose friendly manner is contagious.<br>         <strong>Score:</strong> 1.2048<br>         <br><strong>Opening Hours:</strong><br>         <table style="width:100%; border:1px solid black;">             <tr><td><strong>Monday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>             <tr><td><strong>Tuesday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>             <tr><td><strong>Wednesday</strong></td><td>closed</td></tr>             <tr><td><strong>Thursday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>             <tr><td><strong>Friday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>             <tr><td><strong>Saturday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>             <tr><td><strong>Sunday</strong></td><td>12:30-13:45, 20:00-21:45</td></tr>         </table><br>         <strong>Facilities:</strong> Air conditioning, Car park, Garden or park, Great view, Interesting wine list, Terrace<br>         <strong>Credit Cards:</strong> amex, maestrocard, mastercard, visa         </div>`)[0];
+                popup_7f9f966c12b68c86b29b5fe1eaad7111.setContent(html_dc8177b0468a1727e3f38c64e268c1ef);
+            
+        
+
+        marker_66313e09cd19592a90ee5cbe5552a609.bindPopup(popup_7f9f966c12b68c86b29b5fe1eaad7111)
+        ;
+
+        
+    
+    
+            marker_66313e09cd19592a90ee5cbe5552a609.bindTooltip(
+                `<div>
+                     Esplanade - €€€€ - Italian, Modern Cuisine
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_20064117966074cf3662f47b25fa7340 = L.marker(
+                [44.4930591, 11.3486654],
+                {}
+            ).addTo(marker_cluster_68695313dc528899a3d4aeed6a8a009b);
+        
+    
+            var icon_b968c83554b8201943e78f159b9a1e6c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "cutlery", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_20064117966074cf3662f47b25fa7340.setIcon(icon_b968c83554b8201943e78f159b9a1e6c);
+        
+    
+        var popup_f35bb53d793a2bbcda3b83e4ec323f91 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d7150e662c4db00462706e4c05d08727 = $(`<div id="html_d7150e662c4db00462706e4c05d08727" style="width: 100.0%; height: 100.0%;">         <strong>Seta Sushi Restaurant</strong><br>         <em>Japanese</em><br>         <br><strong>Address:</strong> corte Isolani 2, Bologna, 40125, ITA<br>         <strong>Price Range:</strong> €€<br>         <strong>Phone:</strong> +39 051 003 9367<br>         <strong>Website:</strong> <a href="http://www.setasushirestaurant.com" target="_blank">http://www.setasushirestaurant.com</a><br>         <strong>Description:</strong> It was friendship and passion for Japanese cuisine that prompted two young business partners to open this quiet, welcoming restaurant in the heart of Bologna. Situated in a courtyard with medieval origins, Seta Sushi Restaurant has a modern bistro-style dining room, as well as plenty of outdoor space for summer dining. The menu features an impressive selection of traditional Japanese dishes with the occasional personalised touch, all made from top-quality ingredients. Don’t worry if you’re new to Japanese cuisine – Maurilio is front of house to offer guests friendly, expert advice on both food and beverage. The latter includes a choice of sake for those wishing to immerse themselves fully in the Japanese dining experience.<br>         <strong>Score:</strong> 0.4095<br>         <br><strong>Opening Hours:</strong><br>         <table style="width:100%; border:1px solid black;">             <tr><td><strong>Monday</strong></td><td>19:30-23:30</td></tr>             <tr><td><strong>Tuesday</strong></td><td>12:30-14:30, 19:30-23:30</td></tr>             <tr><td><strong>Wednesday</strong></td><td>12:30-14:30, 19:30-23:30</td></tr>             <tr><td><strong>Thursday</strong></td><td>12:30-14:30, 19:30-23:30</td></tr>             <tr><td><strong>Friday</strong></td><td>12:30-14:30, 19:30-23:30</td></tr>             <tr><td><strong>Saturday</strong></td><td>closed</td></tr>             <tr><td><strong>Sunday</strong></td><td>closed</td></tr>         </table><br>         <strong>Facilities:</strong> Air conditioning, Terrace<br>         <strong>Credit Cards:</strong> amex, mastercard, visa         </div>`)[0];
+                popup_f35bb53d793a2bbcda3b83e4ec323f91.setContent(html_d7150e662c4db00462706e4c05d08727);
+            
+        
+
+        marker_20064117966074cf3662f47b25fa7340.bindPopup(popup_f35bb53d793a2bbcda3b83e4ec323f91)
+        ;
+
+        
+    
+    
+            marker_20064117966074cf3662f47b25fa7340.bindTooltip(
+                `<div>
+                     Seta Sushi Restaurant - €€ - Japanese
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_37d69e5b150235fd569c10f848365eea = L.marker(
+                [43.764355, 11.25606],
+                {}
+            ).addTo(marker_cluster_68695313dc528899a3d4aeed6a8a009b);
+        
+    
+            var icon_7a37f9b5421915386fc22fcfc15f3144 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "cutlery", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_37d69e5b150235fd569c10f848365eea.setIcon(icon_7a37f9b5421915386fc22fcfc15f3144);
+        
+    
+        var popup_83c6b43b04812c8d0e765fa4b9a8913c = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0eee22f94b6f360d0a22d0195ecc0254 = $(`<div id="html_0eee22f94b6f360d0a22d0195ecc0254" style="width: 100.0%; height: 100.0%;">         <strong>La Leggenda dei Frati</strong><br>         <em>Creative</em><br>         <br><strong>Address:</strong> costa San Giorgio 6/a, Florence, 50125, ITA<br>         <strong>Price Range:</strong> €€€€<br>         <strong>Phone:</strong> +39 055 068 0545<br>         <strong>Website:</strong> <a href="https://laleggendadeifrati.it/" target="_blank">https://laleggendadeifrati.it/</a><br>         <strong>Description:</strong> After an uphill approach if you’re arriving here on foot, you come into the Villa Bardini museum complex and from there into this elegant and welcoming restaurant which provides the setting for delicious, creative and modern cuisine. Here, chef Filippo Saporito, never one to rest on his laurels, continues to experiment and perfect his cuisine, which focuses mainly on Italian culinary traditions and a scrupulous selection of top-quality ingredients, preferably from sustainable supply chains (various types of meat, bread and pasta), all showcased on different menus, including a vegetarian option. In summer, enjoy your meal on the romantic terrace surrounded by greenery and the scents of herbs, with a glimpse of Santa Croce church as a backdrop. Although the centre of Florence is not far away, it seems as though you’re already in the Tuscan hills, even with the occasional sound of cicadas in the background.<br>         <strong>Score:</strong> 0.2048<br>         <br><strong>Opening Hours:</strong><br>         <table style="width:100%; border:1px solid black;">             <tr><td><strong>Monday</strong></td><td>closed</td></tr>             <tr><td><strong>Tuesday</strong></td><td>closed</td></tr>             <tr><td><strong>Wednesday</strong></td><td>19:30-22:00</td></tr>             <tr><td><strong>Thursday</strong></td><td>19:30-22:00</td></tr>             <tr><td><strong>Friday</strong></td><td>12:30-14:00, 19:30-22:00</td></tr>             <tr><td><strong>Saturday</strong></td><td>12:30-14:00, 19:30-22:00</td></tr>             <tr><td><strong>Sunday</strong></td><td>12:30-14:00, 19:30-22:00</td></tr>         </table><br>         <strong>Facilities:</strong> Car park, Restaurant offering vegetarian menus, Terrace<br>         <strong>Credit Cards:</strong> amex, unionpay, dinersclub, discover, jcb, maestrocard, mastercard, visa         </div>`)[0];
+                popup_83c6b43b04812c8d0e765fa4b9a8913c.setContent(html_0eee22f94b6f360d0a22d0195ecc0254);
+            
+        
+
+        marker_37d69e5b150235fd569c10f848365eea.bindPopup(popup_83c6b43b04812c8d0e765fa4b9a8913c)
+        ;
+
+        
+    
+    
+            marker_37d69e5b150235fd569c10f848365eea.bindTooltip(
+                `<div>
+                     La Leggenda dei Frati - €€€€ - Creative
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            marker_cluster_68695313dc528899a3d4aeed6a8a009b.addTo(map_994f7a4e36f9bdbf58ca250d7a5739e3);
+        
+    
+            var tile_layer_0ba1204d1ed8e15059e641b3f6ef8852 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_f3d07fa309680d18c01a9bff76e69868 = new L.Control.MiniMap(
+                tile_layer_0ba1204d1ed8e15059e641b3f6ef8852,
+                {"autoToggleDisplay": false, "centerFixed": false, "collapsedHeight": 25, "collapsedWidth": 25, "height": 150, "minimized": false, "position": "bottomright", "toggleDisplay": false, "width": 150, "zoomAnimation": false, "zoomLevelOffset": -5}
+            );
+            map_994f7a4e36f9bdbf58ca250d7a5739e3.addControl(mini_map_f3d07fa309680d18c01a9bff76e69868);
+        
+    
+            var heat_map_c2c6312f74ef8c52874ab1703fb1b8fb = L.heatLayer(
+                [[41.725881, 12.6797918], [44.4016634, 8.945731], [45.4658732, 10.5498607], [44.4930591, 11.3486654], [43.764355, 11.25606]],
+                {"blur": 15, "maxZoom": 18, "minOpacity": 0.5, "radius": 25}
+            );
+        
+    
+            heat_map_c2c6312f74ef8c52874ab1703fb1b8fb.addTo(map_994f7a4e36f9bdbf58ca250d7a5739e3);
+        
+    
+            var measure_control_3a6f6a633c6d1beeb59161fdc262d64d = new L.Control.Measure(
+                {"position": "topright", "primaryAreaUnit": "sqmeters", "primaryLengthUnit": "meters", "secondaryAreaUnit": "acres", "secondaryLengthUnit": "miles"});
+            map_994f7a4e36f9bdbf58ca250d7a5739e3.addControl(measure_control_3a6f6a633c6d1beeb59161fdc262d64d);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var locate_control_2f7686170f2bf89cb38c97615266053b = L.control.locate(
+                {}
+            ).addTo(map_994f7a4e36f9bdbf58ca250d7a5739e3);
+            
+        
+</script>
+</html>
