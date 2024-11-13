@@ -407,7 +407,7 @@ def visualize_frequency(df):
 
 
 
-    # Plot the unigrams
+    # Plot the Preprocessed Bigrams
     axes[1].bar(bigrams_preprocessed, bigram_preprocessed_counts, color="lightgreen")
     axes[1].set_xticklabels(bigrams_preprocessed, rotation=90)
     axes[1].set_title('After Preprocessing')

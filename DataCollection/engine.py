@@ -6,7 +6,7 @@ import logging
 import asyncio
 
 
-def run_pipeline():
+async def run_pipeline():
 
     print("Collecting URls...")
 
@@ -20,7 +20,7 @@ def run_pipeline():
 
     start_time = time.time() #only for flexing :)
 
-    asyncio.run(download_html_async())  # Async download with batch processing
+    await download_html_async()  # Async download with batch processing
     
     logging.info(f"Total download time: {time.time() - start_time} seconds") # <3
 
@@ -29,7 +29,7 @@ def run_pipeline():
 
     start_time = time.time() #only for flexing :)
 
-    asyncio.run(download_html_async())  # Async download with batch processing
+    await download_html_async()  # Async download with batch processing
     
     logging.info(f"Total download time: {time.time() - start_time} seconds") # <3
 
@@ -41,11 +41,12 @@ def run_pipeline():
 
     start_time = time.time() #only for flexing :)
 
-    parse_all_restaurants()
+    await parse_all_restaurants()
 
     logging.info(f"Total parsing time: {time.time() - start_time} seconds") # <3
 
-#run_pipeline()
+# if __name__ == "__main__":
+#     asyncio.run(run_pipeline())
 
 
    
