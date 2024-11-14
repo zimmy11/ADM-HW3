@@ -41,9 +41,71 @@ ___
 
     - We gather all the Python functions such as `engine.py`, `parser.py` and `crawler.py` to crawl from the website and parse the relevant information 
      
-    <br>
-
+    <be>
+[Click here to have access to the whole Project Directory Structure](https://uithub.com/zimmy11/ADM-HW3/edit/main)
 ___
+## Streamlit Interface
+To enhance user interaction with the Michelin Restaurant Search Engine, we developed a Streamlit application. This interface allows users to input search queries, view results, and visualize restaurant locations dynamically.
+
+### If u want to try run it locally
+clone the repository from GitHub to your local machine:
+
+```bash
+https://github.com/zimmy11/ADM-HW3.git
+```
+Move into the project directory:
+```bash
+cd ADM-HW3
+```
+Install the required packages using requirements.txt:
+```bash
+pip install -r requirements.txt
+```
+
+### Part 2: Search Engine
+```bash
+streamlit run Part2Streamlit.py
+```
+<p float="left">
+  <img src="Examples/StreamLit%20Example/Pt2_SearchEngine.png" alt="Part 2 - Search Engine" width="433"/>
+  <img src="Examples/StreamLit%20Example/Pt2_Output.png" alt="Part 2 - Output" width="433"/>
+</p>
+
+
+
+
+
+### Part 3: Search Engine with Custom Score
+```bash
+streamlit run Part3Streamlit.py
+```
+<p float="left">
+  <img src="Examples/StreamLit%20Example/Pt3_SearchEngineCustomScore.png" alt="Part 3 - Search Engine" width="300"/>
+  <img src="Examples/StreamLit%20Example/Pt3_Output.png" alt="Part 3 - Output" width="400"/>
+</p>
+___
+
+### Part 4: Search Engine on Custome Score to Display on Map
+```bash
+streamlit run Part4Streamlit.py
+```
+<p float="left">
+  <img src="Examples/StreamLit%20Example/Pt4_DisplayonMap.png" alt="Part 4 - Search Engine" width="400"/>
+  <img src="Examples/StreamLit%20Example/Pt4_Output.png" alt="Part 4 - Output" height="300"/>
+</p>
+___
+
+### Part 5: Advanced Search Engine
+```bash
+streamlit run Part5Streamlit.py
+```
+<p float="left">
+  <img src="Examples/StreamLit%20Example/Pt5_AdvancedSE.png" alt="Part 5 - Search Engine" width="400"/>
+  <img src="Examples/StreamLit%20Example/Pt5_Output.png" alt="Part 5 - Output" height="400"/>
+</p>
+___
+
+
 ## **Collaborators - Group 20**
 - [Marco Zimmatore](https://github.com/zimmy11)
 - [Emanuele Iaccarino](https://github.com/emanueleiacca)
