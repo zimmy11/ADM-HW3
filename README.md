@@ -44,6 +44,10 @@ ___
     <be>
 [Click here to have access to the whole Project Directory Structure](https://uithub.com/zimmy11/ADM-HW3/edit/main)
 ___
+## Visualizing the Most Relevant Restaurants with Folium
+The map is available at the [following link](https://nbviewer.org/github/zimmy11/ADM-HW3/blob/main/restaurants_map.html)
+
+Detailed explanation of the Folium Plug-in used is in Part 4 of Main.ipynb Notebook, while some example on how to use its most interesting functionalities are explained [here](https://github.com/zimmy11/ADM-HW3/tree/main/Examples/FoliumMap_Plugins)
 ## Streamlit Interface
 To enhance user interaction with the Michelin Restaurant Search Engine, we developed a Streamlit application. This interface allows users to input search queries, view results, and visualize restaurant locations dynamically.
 
