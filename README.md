@@ -40,18 +40,62 @@ ___
     <br>
 
     - We gather all the Python functions such as `engine.py`, `parser.py` and `crawler.py` to crawl from the website and parse the relevant information 
-     
-    <be>
+
+   <br>
+
+  > __Examples/*__:
+
+  <br>
+
+  - We share some examples where we have tested the *Folium Map* and our added functionality with *StreamLit* we have explained below
+
+  <br>
+
+  > __restaurants_map*.html__:
+
+  <br>
+
+  - We have saved in this HTML files the content of Exercise 4 as we annoted in the Notebook.
+
+  <br>
+
+  > __inverted_index.json__ and  ___updated_inverted_index.json__:
+
+  <br>
+
+  - Json Files where we stored the list of `document_ids` for each term and the TF-IDF score computed.
+  
+  <br>
+
+  > __Part*Streamlit.py__:
+
+  <br>
+
+  - Python files to be run (infos below) to have a visual and interactive experience of the Exercises 2,3 and 5
+  
+  <br>
+
+  > __vocabulary.csv__, __michelin_restaurants_data.csv__ and __michelin_restaurants_data.tsv__:
+
+  <br>
+
+  - CSV and TSV files we have mantained voluntarily in order to let the user run through Streamlit our interactive *Search Engine*
+  
+  <br>
+
+  <be>
 [Click here to have access to the whole Project Directory Structure](https://uithub.com/zimmy11/ADM-HW3/edit/main)
 ___
-## Visualizing the Most Relevant Restaurants with Folium
+## **Interactive Search Engine and Map Visualization Guide**
+___
+### **Visualizing the Most Relevant Restaurants with Folium**
 The map is available at the [following link](https://nbviewer.org/github/zimmy11/ADM-HW3/blob/main/restaurants_map.html)
 
 Detailed explanation of the Folium Plug-in used is in Part 4 of Main.ipynb Notebook, while some example on how to use its most interesting functionalities are explained [here](https://github.com/zimmy11/ADM-HW3/tree/main/Examples/FoliumMap_Plugins)
-## Streamlit Interface
+### **Streamlit Interface**
 To enhance user interaction with the Michelin Restaurant Search Engine, we developed a Streamlit application. This interface allows users to input search queries, view results, and visualize restaurant locations dynamically.
 
-### If u want to try run it locally
+#### **If u want to try run it locally**
 clone the repository from GitHub to your local machine:
 
 ```bash
@@ -66,7 +110,7 @@ Install the required packages using requirements.txt:
 pip install -r requirements.txt
 ```
 
-### Part 2: Search Engine
+#### **Part 2: Search Engine**
 ```bash
 streamlit run Part2Streamlit.py
 ```
@@ -75,11 +119,11 @@ streamlit run Part2Streamlit.py
   <img src="Examples/StreamLit%20Example/Pt2_Output.png" alt="Part 2 - Output" width="433"/>
 </p>
 
+___
 
 
 
-
-### Part 3: Search Engine with Custom Score
+#### **Part 3: Search Engine with Custom Score**
 ```bash
 streamlit run Part3Streamlit.py
 ```
@@ -87,9 +131,10 @@ streamlit run Part3Streamlit.py
   <img src="Examples/StreamLit%20Example/Pt3_SearchEngineCustomScore.png" alt="Part 3 - Search Engine" width="300"/>
   <img src="Examples/StreamLit%20Example/Pt3_Output.png" alt="Part 3 - Output" width="400"/>
 </p>
+
 ___
 
-### Part 4: Search Engine on Custome Score to Display on Map
+#### **Part 4: Search Engine on Custome Score to Display on Map**
 ```bash
 streamlit run Part4Streamlit.py
 ```
@@ -97,9 +142,10 @@ streamlit run Part4Streamlit.py
   <img src="Examples/StreamLit%20Example/Pt4_DisplayonMap.png" alt="Part 4 - Search Engine" width="400"/>
   <img src="Examples/StreamLit%20Example/Pt4_Output.png" alt="Part 4 - Output" height="300"/>
 </p>
+
 ___
 
-### Part 5: Advanced Search Engine
+#### **Part 5: Advanced Search Engine**
 ```bash
 streamlit run Part5Streamlit.py
 ```
@@ -107,7 +153,8 @@ streamlit run Part5Streamlit.py
   <img src="Examples/StreamLit%20Example/Pt5_AdvancedSE.png" alt="Part 5 - Search Engine" width="400"/>
   <img src="Examples/StreamLit%20Example/Pt5_Output.png" alt="Part 5 - Output" height="400"/>
 </p>
-___
+
+____
 
 
 ## **Collaborators - Group 20**
